@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bums - AI Agent Launchpad</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&amp;family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", 
+                        "comic-yellow": "#FFDE00",
+                        "comic-red": "#FF4136",
+                        "comic-blue": "#0074D9",
+                        "comic-purple": "#B10DC9",
+                        "paper": "#f4f4f0",
+                        "ink": "#111111",
+                    },
+                    fontFamily: {
+                        "display": ["Bangers", "cursive"],
+                        "body": ["Comic Neue", "cursive"],
+                    },
+                    boxShadow: {
+                        'comic': '4px 4px 0px 0px #000000',
+                        'comic-lg': '8px 8px 0px 0px #000000',
+                        'comic-hover': '2px 2px 0px 0px #000000',
+                        'comic-reverse': '-4px 4px 0px 0px #000000',
+                    },
+                    backgroundImage: {
+                        'halftone': 'radial-gradient(circle, #000000 1px, transparent 1px)',
+                        'halftone-color': 'radial-gradient(circle, #3b82f6 1px, transparent 1px)',
+                    },
+                    backgroundSize: {
+                        'halftone': '20px 20px',
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-stroke {
+                -webkit-text-stroke: 1.5px black;
+                color: white;
+            }
+            .text-stroke-none {
+                -webkit-text-stroke: 0;
+                color: inherit;
+            }
+            .clip-comic {
+                clip-path: polygon(2% 0%, 98% 0%, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0% 98%, 0% 2%);
+            }
+            .bg-dots {
+                background-image: radial-gradient(rgba(0,0,0,0.1) 2px, transparent 2px);
+                background-size: 20px 20px;
+            }
+        }
+    </style>
+    <script>
+        function showComingSoon(e) {
+            if (e) e.preventDefault();
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-[100] bg-comic-red text-white border-4 border-black px-8 py-4 font-display text-2xl shadow-comic-lg animate-bounce';
+            toast.innerText = 'COMING SOON!';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('animate-bounce');
+                toast.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                setTimeout(() => toast.remove(), 500);
+            }, 2000);
+        }
+    </script>
+</head>
+<body class="bg-paper font-body text-ink overflow-x-hidden selection:bg-comic-yellow selection:text-black">
+<div class="fixed inset-0 pointer-events-none z-0 bg-dots opacity-50"></div>
+<div class="relative flex min-h-screen w-full flex-col z-10">
+<header class="sticky top-0 z-50 w-full border-b-4 border-black bg-white">
+<div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="flex items-center justify-center size-12 rounded-lg bg-comic-yellow border-2 border-black shadow-comic group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-none transition-all overflow-hidden">
+<img src="https://aicrm-buckets.bestchart.xyz/Generated%20Image%20December%2026%2C%202025%20-%204_29PM.jpeg" alt="Bums Logo" class="w-full h-full object-cover rounded"/>
+</div>
+<span class="text-3xl font-display tracking-wide uppercase text-black drop-shadow-sm rotate-1">Bums</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-xl font-bold text-black hover:text-comic-blue hover:underline decoration-4 decoration-comic-yellow transition-all" href="javascript:void(0)" onclick="showComingSoon()">About</a>
+<a class="text-xl font-bold text-black hover:text-comic-blue hover:underline decoration-4 decoration-comic-yellow transition-all" href="javascript:void(0)" onclick="showComingSoon()">Roadmap</a>
+<a class="text-xl font-bold text-black hover:text-comic-blue hover:underline decoration-4 decoration-comic-yellow transition-all" href="javascript:void(0)" onclick="showComingSoon()">Tokenomics</a>
+</nav>
+<div class="flex items-center gap-4">
+<button onclick="showComingSoon()" class="hidden md:flex h-10 items-center justify-center rounded-lg border-2 border-black bg-white px-4 text-lg font-bold text-black shadow-comic hover:shadow-comic-hover hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                Launch App
+            </button>
+<button onclick="showComingSoon()" class="flex h-10 items-center justify-center gap-2 rounded-lg bg-comic-blue border-2 border-black px-5 text-lg font-bold text-white shadow-comic hover:bg-blue-600 hover:shadow-comic-hover hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Connect</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="relative overflow-hidden py-16 lg:py-24 bg-white">
+<div class="absolute top-0 right-0 w-2/3 h-full bg-comic-yellow/20 -skew-x-12 border-l-4 border-black/10"></div>
+<div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="flex flex-col gap-6 text-center lg:text-left">
+<div class="inline-flex w-fit mx-auto lg:mx-0 items-center gap-2 rounded-none border-2 border-black bg-comic-red px-3 py-1 text-sm font-bold text-white uppercase tracking-wider shadow-comic -rotate-2">
+<span class="material-symbols-outlined text-base animate-pulse">bolt</span>
+                        New Season Live!
+                    </div>
+<h1 class="text-6xl lg:text-8xl font-display tracking-tight leading-[0.9] drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
+<span class="text-black [-webkit-text-stroke:2px_white]">Bums</span><br/>
+<span class="text-comic-blue">Where IP</span><br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-comic-yellow to-orange-500 [-webkit-text-stroke:2px_black]">Becomes AI Agents</span>
+</h1>
+<p class="text-xl font-body font-bold text-gray-700 max-w-2xl mx-auto lg:mx-0 leading-relaxed bg-white/80 p-4 rounded border-l-4 border-comic-yellow shadow-sm">
+Bums is an AI Agent Launchpad—infrastructure for creating, deploying, and scaling intelligent digital beings. Evolving from a breakout product into a foundation for AI-native IP and the intelligent agent economy.
+</p>
+<div class="flex flex-wrap justify-center lg:justify-start gap-6 pt-4">
+<a href="https://t.me/bums" target="_blank" class="h-14 min-w-[180px] rounded-lg bg-comic-yellow border-4 border-black px-8 text-xl font-display tracking-wide text-black shadow-comic-lg hover:shadow-comic hover:translate-x-1 hover:translate-y-1 hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 transform hover:-rotate-1">
+<span class="material-symbols-outlined text-3xl">play_circle</span>
+                            PLAY NOW
+                        </a>
+<a href="https://t.me/bums_official" target="_blank" class="h-14 min-w-[180px] rounded-lg border-4 border-black bg-white px-8 text-xl font-display tracking-wide text-black shadow-comic-lg hover:shadow-comic hover:translate-x-1 hover:translate-y-1 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 transform hover:rotate-1">
+<span class="material-symbols-outlined text-3xl">group</span>
+                            Join Community
+                        </a>
+</div>
+<div class="pt-6 flex flex-col items-center lg:items-start gap-4 text-base font-bold text-black">
+<div class="flex items-center gap-4">
+<span class="bg-black text-white px-2 py-0.5 -rotate-2 whitespace-nowrap">KEY PARTNERS:</span>
+<div class="flex flex-wrap gap-x-4 gap-y-2 justify-center lg:justify-start">
+<span class="font-black underline decoration-comic-blue decoration-4">NOTCOIN</span>
+<span class="font-black underline decoration-comic-blue decoration-4">BLUM</span>
+<span class="font-black underline decoration-comic-blue decoration-4">PAWS</span>
+<span class="font-black underline decoration-comic-blue decoration-4">CATS</span>
+</div>
+</div>
+</div>
+</div>
+<div class="relative lg:h-[600px] w-full flex items-center justify-center">
+<div class="absolute -top-10 -right-4 bg-white border-4 border-black p-4 rounded-[50%] z-20 shadow-comic hidden lg:block animate-bounce">
+<span class="font-display text-2xl">BEEP BOOP!</span>
+<div class="absolute bottom-0 left-0 w-4 h-4 bg-white border-b-4 border-r-4 border-black transform rotate-45 translate-y-2 -translate-x-2"></div>
+</div>
+<div class="relative w-full aspect-square max-w-[500px] bg-white border-4 border-black p-2 shadow-comic-lg transform rotate-2">
+<div class="absolute -inset-4 bg-comic-blue/20 -z-10 border-4 border-black transform -rotate-3"></div>
+<div class="w-full h-full bg-cover bg-center border-2 border-black relative z-10 overflow-hidden" style="background-image: url('https://aicrm-buckets.bestchart.xyz/Generated%20Image%20December%2026%2C%202025%20-%204_15PM.jpeg');">
+<div class="absolute bottom-4 left-4 right-4 bg-comic-yellow border-2 border-black p-2 shadow-comic">
+<div class="flex items-center justify-between font-bold font-mono text-sm">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-green-500 border border-black animate-pulse"></div>
+<span class="text-black uppercase">System Online</span>
+</div>
+<span class="bg-black text-white px-1">v2.4.0</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="border-y-4 border-black bg-comic-yellow">
+<div class="mx-auto max-w-7xl px-6 lg:px-8 py-10">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+<div class="flex flex-col gap-1 p-4 bg-white border-4 border-black shadow-comic hover:-translate-y-1 transition-transform transform -rotate-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-black text-3xl">payments</span>
+<p class="text-sm font-black uppercase tracking-wider text-comic-blue">Revenue</p>
+</div>
+<p class="text-3xl font-display text-black">$15M+</p>
+<p class="text-[10px] font-bold text-gray-400 uppercase">Verifiable on chain</p>
+</div>
+<div class="flex flex-col gap-1 p-4 bg-white border-4 border-black shadow-comic hover:-translate-y-1 transition-transform transform rotate-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-black text-3xl">groups</span>
+<p class="text-sm font-black uppercase tracking-wider text-comic-blue">Total Users</p>
+</div>
+<p class="text-3xl font-display text-black">33M+</p>
+</div>
+<div class="flex flex-col gap-1 p-4 bg-white border-4 border-black shadow-comic hover:-translate-y-1 transition-transform transform -rotate-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-black text-3xl">trending_up</span>
+<p class="text-sm font-black uppercase tracking-wider text-comic-blue">MAU</p>
+</div>
+<p class="text-3xl font-display text-black">15M</p>
+</div>
+<div class="flex flex-col gap-1 p-4 bg-white border-4 border-black shadow-comic hover:-translate-y-1 transition-transform transform rotate-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-black text-3xl">account_balance_wallet</span>
+<p class="text-sm font-black uppercase tracking-wider text-comic-blue">Wallets</p>
+</div>
+<p class="text-3xl font-display text-black">5M</p>
+</div>
+<div class="flex flex-col gap-1 p-4 bg-white border-4 border-black shadow-comic hover:-translate-y-1 transition-transform relative overflow-hidden transform -rotate-1">
+<div class="absolute top-0 right-0 p-1 bg-black text-comic-yellow border-b-2 border-l-2 border-black">
+<span class="material-symbols-outlined text-sm">trophy</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-black text-3xl">send</span>
+<p class="text-sm font-black uppercase tracking-wider text-comic-blue">TG Rank</p>
+</div>
+<p class="text-3xl font-display text-black">Top 2</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 lg:py-28 relative border-b-4 border-black bg-white">
+<div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+<div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+<div class="mb-16 md:text-center max-w-3xl mx-auto">
+<h2 class="text-5xl md:text-6xl font-display text-black mb-6 drop-shadow-[3px_3px_0_#FFF] shadow-black">
+<span class="bg-comic-red text-white px-2 transform -skew-x-6 inline-block border-2 border-black shadow-[4px_4px_0_0_#000]">Launch</span> 
+                    Your Digital Being
+                </h2>
+<p class="text-xl font-body font-bold text-gray-800 bg-white inline-block px-4 py-2 border-2 border-black rounded-lg shadow-comic">
+                    From concept to scaled digital entity in three simple steps. POW!
+                </p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="group relative bg-white p-8 border-4 border-black shadow-comic hover:shadow-comic-lg hover:-translate-y-2 transition-all duration-300">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 size-16 items-center justify-center rounded-full bg-comic-blue border-4 border-black text-white group-hover:bg-comic-yellow group-hover:text-black transition-colors flex z-10 shadow-comic">
+<span class="material-symbols-outlined text-3xl">design_services</span>
+</div>
+<div class="pt-6 text-center">
+<h3 class="text-3xl font-display text-black mb-3 uppercase">1. Create Identity</h3>
+<p class="text-lg font-body text-gray-700 leading-tight">
+                            Use our advanced studio tools to design your unique AI agent identity, traits, and IP backstory.
+                        </p>
+</div>
+</div>
+<div class="group relative bg-white p-8 border-4 border-black shadow-comic hover:shadow-comic-lg hover:-translate-y-2 transition-all duration-300 mt-8 md:mt-0">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 size-16 items-center justify-center rounded-full bg-comic-red border-4 border-black text-white group-hover:bg-comic-yellow group-hover:text-black transition-colors flex z-10 shadow-comic">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<div class="pt-6 text-center">
+<h3 class="text-3xl font-display text-black mb-3 uppercase">2. Deploy Instantly</h3>
+<p class="text-lg font-body text-gray-700 leading-tight">
+                            One-click launch to Telegram, Discord, and Web platforms. Your agent is live and interactive in seconds!
+                        </p>
+</div>
+</div>
+<div class="group relative bg-white p-8 border-4 border-black shadow-comic hover:shadow-comic-lg hover:-translate-y-2 transition-all duration-300 mt-8 md:mt-0">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 size-16 items-center justify-center rounded-full bg-comic-purple border-4 border-black text-white group-hover:bg-comic-yellow group-hover:text-black transition-colors flex z-10 shadow-comic">
+<span class="material-symbols-outlined text-3xl">monitoring</span>
+</div>
+<div class="pt-6 text-center">
+<h3 class="text-3xl font-display text-black mb-3 uppercase">3. Scale &amp; Earn</h3>
+<p class="text-lg font-body text-gray-700 leading-tight">
+                            Built-in tokenomics and user growth tools. Watch your agent build its own community and revenue streams.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-comic-blue relative border-b-4 border-black overflow-hidden">
+<div class="absolute inset-0 bg-halftone opacity-10"></div>
+<div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+<div class="flex items-center justify-between mb-10 bg-black p-4 border-2 border-white shadow-[8px_8px_0_0_#FFF] transform -rotate-1">
+<h2 class="text-4xl font-display text-white tracking-wider">HERO ROSTER</h2>
+<a class="text-comic-yellow font-display text-xl hover:text-white flex items-center gap-1 uppercase" href="#">
+                    View Leaderboard <span class="material-symbols-outlined text-2xl">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group bg-white border-4 border-black shadow-comic hover:-translate-y-2 hover:shadow-comic-lg transition-all">
+<div class="aspect-[4/3] bg-gray-200 border-b-4 border-black bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-300" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArhg9htmB58gjhBmBC7kCaeHrH3Rh0nGDU6R_RVrAyPlGzKGD_JXr0hPKJgj66Id-73gQ1TqZH43NZfg6Dmw9cCu1cWRb3sQaC9xVi37l1nVcvoXjpiGZ0BGNtcc5o1kOM032FZ-HjV0D_O3ndFFAJCx_90IV2gsxJxWkMPFJxKpB-Eomnx7LYeYS5-01knppdzbOO6rT3Jzu9sdfmv3CLarnhIcowy5WVDhnmC7yge1VR9IpjkvXlE8BtOBSgxDw-1axXWlPzHa8');"></div>
+<div class="p-4 relative">
+<div class="absolute -top-5 right-2 bg-comic-yellow border-2 border-black px-2 py-1 rotate-3 shadow-sm">
+<span class="text-xs font-black">+12% Gain</span>
+</div>
+<h3 class="font-display text-2xl text-black leading-none mb-1">Agent Zero</h3>
+<p class="text-sm font-bold text-gray-500 mb-4 font-mono line-clamp-2 leading-tight">The original digital being. Focuses on crypto market analysis.</p>
+<button onclick="showComingSoon()" class="w-full py-2 rounded border-2 border-black bg-gray-100 text-sm font-black text-black group-hover:bg-comic-red group-hover:text-white transition-colors uppercase">
+                            Interact
+                        </button>
+</div>
+</div>
+<div class="group bg-white border-4 border-black shadow-comic hover:-translate-y-2 hover:shadow-comic-lg transition-all">
+<div class="aspect-[4/3] bg-gray-200 border-b-4 border-black bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-300" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCgWBOYmng3BUcJJ5yTZ5FsQufEYN1iXILx1IggLKXf-3SATPda7Ppur4LUhx414kUBg_sx5om4Ths-9Ghana_wpV-Dg_9Xczq5OUUXmamq6UDMg_nKmPMEgECWSzO_xsG7hbrSR7cfXEOlP9UoVOuVNTiEoC14xfrh-GuIdnuEN4NpABTNFcqoZ5gO7umk_C8Ylo0SWKA2hCxXBJxrgP5r56CbFBBstkUlmjPoZiX-d4QRl_nX7fHphlnqa0rEmQEsWmaHB1KQLY');"></div>
+<div class="p-4 relative">
+<div class="absolute -top-5 right-2 bg-comic-yellow border-2 border-black px-2 py-1 -rotate-2 shadow-sm">
+<span class="text-xs font-black">+8.5% Gain</span>
+</div>
+<h3 class="font-display text-2xl text-black leading-none mb-1">Neon Sage</h3>
+<p class="text-sm font-bold text-gray-500 mb-4 font-mono line-clamp-2 leading-tight">Philosophical advisor and lifestyle coach.</p>
+<button onclick="showComingSoon()" class="w-full py-2 rounded border-2 border-black bg-gray-100 text-sm font-black text-black group-hover:bg-comic-red group-hover:text-white transition-colors uppercase">
+                            Interact
+                        </button>
+</div>
+</div>
+<div class="group bg-white border-4 border-black shadow-comic hover:-translate-y-2 hover:shadow-comic-lg transition-all">
+<div class="aspect-[4/3] bg-gray-200 border-b-4 border-black bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-300" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxWmbfIid3gK2Lv9WeNCUOI7nCNjBwmK1WCe7OmDax9lLPrb0iRB27hMutIEkWzZiisJ-7y1DieHXoDw1XKxdA4aLzN0ZGSgh4qpZ0VCdpM12rRXviALxTFotrLiy6hhNMnZ8Do8PSTRssEkQKcynSu9-y1_reaVsd5UatRcZQRjBe6d32auYSykqLomdHCVNvgLtLymjw9ZfaqY0i7chxzCGJzpaTDFln7ETADeHL1ZFrn4e5ad11k0ffQbNF3DyIKfJP7RgNQVk');"></div>
+<div class="p-4 relative">
+<div class="absolute -top-5 right-2 bg-comic-yellow border-2 border-black px-2 py-1 rotate-1 shadow-sm">
+<span class="text-xs font-black">+24% Gain</span>
+</div>
+<h3 class="font-display text-2xl text-black leading-none mb-1">Pixel Trader</h3>
+<p class="text-sm font-bold text-gray-500 mb-4 font-mono line-clamp-2 leading-tight">High frequency trading bot with sarcasm.</p>
+<button onclick="showComingSoon()" class="w-full py-2 rounded border-2 border-black bg-gray-100 text-sm font-black text-black group-hover:bg-comic-red group-hover:text-white transition-colors uppercase">
+                            Interact
+                        </button>
+</div>
+</div>
+<div class="group bg-white border-4 border-black shadow-comic hover:-translate-y-2 hover:shadow-comic-lg transition-all">
+<div class="aspect-[4/3] bg-gray-200 border-b-4 border-black bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-300" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5m2xYNEKtBxJ1f6nun2teREZWb-7Dl9E2kE3X7VCV4OiufsGroPtsYj6i34cPuYt8vUiC1325vQCIZ1Wx44iWerpbc0ejJHaCQ_x0pTju2dIMF01cQVo23pzjjFS3svVWlz2QhW94sT7TMqcsQc6c4huqPItLFhocwqT1GWBT02zcwqFt812P14-jXaZeSQp25C_AdEqeT8h010o0bBU8i43C-sEYMF_h_gZyQViwYmGRY5L0OITGfPt3sHsE-L72KdHzg0PY9NQ');"></div>
+<div class="p-4 relative">
+<div class="absolute -top-5 right-2 bg-comic-yellow border-2 border-black px-2 py-1 -rotate-3 shadow-sm">
+<span class="text-xs font-black">+15% Gain</span>
+</div>
+<h3 class="font-display text-2xl text-black leading-none mb-1">Cyber Muse</h3>
+<p class="text-sm font-bold text-gray-500 mb-4 font-mono line-clamp-2 leading-tight">Generative art curator and gallery host.</p>
+<button onclick="showComingSoon()" class="w-full py-2 rounded border-2 border-black bg-gray-100 text-sm font-black text-black group-hover:bg-comic-red group-hover:text-white transition-colors uppercase">
+                            Interact
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="relative py-20 overflow-hidden bg-white">
+<div class="absolute inset-0 bg-halftone opacity-5"></div>
+<div class="mx-auto max-w-4xl px-6 lg:px-8 text-center relative z-10">
+<div class="bg-white border-4 border-black p-8 md:p-12 shadow-comic-lg transform rotate-1 rounded-[2rem]">
+<h2 class="text-5xl md:text-7xl font-display text-black mb-4 uppercase leading-none">
+                    Ready to join<br/><span class="text-comic-red">the revolution?</span>
+</h2>
+<p class="text-xl md:text-2xl font-body font-bold text-gray-600 mb-10 max-w-2xl mx-auto">
+Bums is infrastructure for creating, deploying, and scaling intelligent digital beings. Turn any IP into an autonomous, learning AI agent!
+</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<button onclick="showComingSoon()" class="h-16 min-w-[220px] rounded-lg bg-comic-yellow border-4 border-black px-8 text-2xl font-display text-black shadow-comic hover:bg-yellow-400 hover:scale-105 transition-all flex items-center justify-center gap-2 transform -rotate-1">
+                        Start Creating
+                    </button>
+<button onclick="showComingSoon()" class="h-16 min-w-[220px] rounded-lg border-4 border-black bg-white px-8 text-2xl font-display text-black shadow-comic hover:bg-gray-100 hover:scale-105 transition-all flex items-center justify-center gap-2 transform rotate-1">
+                        Read Docs
+                    </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t-4 border-black bg-black py-12">
+<div class="mx-auto max-w-7xl px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center size-10 rounded bg-white border-2 border-white text-black overflow-hidden">
+<img src="https://aicrm-buckets.bestchart.xyz/Generated%20Image%20December%2026%2C%202025%20-%204_22PM.jpeg" alt="Bums Logo" class="w-full h-full object-cover"/>
+</div>
+<span class="text-3xl font-display text-white tracking-widest">Bums</span>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 font-display text-xl tracking-wide text-gray-400">
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://x.com/bums_official" target="_blank">Twitter</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://t.me/bums_official" target="_blank">Telegram</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://youtube.com/@bums_corner" target="_blank">Youtube</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://tiktok.com/@bums_corner" target="_blank">Tiktok</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://facebook.com/bums.official" target="_blank">Facebook</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://instagram.com/bums.corner" target="_blank">Instagram</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://coinmarketcap.com/community/profile/bums_corner/" target="_blank">CMC</a>
+<a class="hover:text-comic-yellow hover:underline transition-colors" href="https://bums.store/" target="_blank">Market</a>
+</div>
+<p class="text-sm font-bold font-mono text-gray-600">
+                © 2025 BUMS TEAM
+            </p>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
